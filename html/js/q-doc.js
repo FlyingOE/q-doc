@@ -76,6 +76,8 @@ QDoc.addElementsForFileTree = function(filesJson) {
             id: QDoc.escapeChars(item.file),
             link: "javascript:QDoc.get(\"" + item.file + "\")"
         });
+    }).sort(function(a, b) {
+        return a.id.localeCompare(b.id);
     });
     return filesJson;
  }
