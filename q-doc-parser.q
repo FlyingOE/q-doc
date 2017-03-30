@@ -72,6 +72,14 @@
 
     / Post-processing, make file names relative to folder root for better UI display
     .qdoc.parseTree.source:hsym each `$ssr[;,[;"/"] string folderRoot;""] each string .qdoc.parseTree.source;
+
+    / Branding
+    brand:.Q.dd[folderRoot;`$"q-doc.json"];
+    if[brand~key brand;
+        .log.info"Loading branding information from ",string brand;
+        @[{.qdoc.branding:.j.k""sv read0 x};brand;
+            {.log.error"Failed to load branding information: ",x}]
+     ];
  };
 
 / Generates the parse tree for the specified file.

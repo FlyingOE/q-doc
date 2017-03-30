@@ -92,3 +92,7 @@
 .qdoc.parser.types.output[99h]:`Dictionary;
 .qdoc.parser.types.output[100h]:`Function;
 
+.qdoc.branding:`company`application!(
+    `name`link!("Company";"http://example.com/");
+    `name`link!("Application Name";"http://example.com/#")
+ );
