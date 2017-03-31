@@ -285,10 +285,10 @@
 .qdoc.parser.inline.code:{[line]
     leads:("{@code";"<code>" ;"{@literal";"<tt>" );
     ends: (1#"}"   ;"</code>";1#"}"      ;"</tt>");
-    slices:.qdoc.parser.sliceCode[leads;ends;line];
-    slices:@[slices;where 1=(til count slices)mod 4;leads!L:("<code>";"<code>";"<tt>";"<tt>")];
-    slices:@[slices;where 2=(til count slices)mod 4;.qdoc.parser.escapeCode trim@];
-    k:where 3=(til count slices)mod 4;
-    slices:@[;k;(ends,'L)!("</code>";"</code>";"</tt>";"</tt>")]@[slices;k;,;slices k-2];
-    raze slices
+    tail:-1#slices:0N 4#.qdoc.parser.sliceCode[leads;ends;line];
+    slices:.[-1_slices;(::;1); leads   !L:("<code>" ;"<code>" ;"<tt>" ;"<tt>" )];
+    slices:.[   slices;(::;2);.qdoc.parser.escapeCode trim@];
+    slices:.[         ;(::;3);(ends,'L)!  ("</code>";"</code>";"</tt>";"</tt>")]
+                .[slices;(::;3);:;slices[;3],'slices[;1]];
+    :(,//)slices,tail;
  };
