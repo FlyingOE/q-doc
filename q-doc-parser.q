@@ -132,8 +132,8 @@
     namespaces:fills?[namespaceSwitches;`$2_/:funcSignatures;`];
 
     / Recover namespace for each function
-    funcAndArgs:(!). flip(({$[(~).(first;last)@\:y;`;$[(null x)or(y[0]like ".*");::;` sv x,]`$y 0]}@/:namespaces),\:last)@\:'":"vs/:funcSignatures;
-    funcAndArgs:{ $[not "{["~2#x; :enlist`$"..."; :`$";" vs x where not any x in/:"{[]} "] } each funcAndArgs;
+    funcAndArgs:(!). flip(({$[(~).(first;last)@\:y;`;$[(null x)or(y[0]like ".*");::;` sv x,]`$y 0]}@/:namespaces),\:{":"sv 1_x})@\:'":"vs/:funcSignatures;
+    funcAndArgs:{ $[not "{["~2#x; :enlist`$"..."; :`$";" vs x where not any((count[x]^first x ss"]")#x)in/:"{[]} "] } each funcAndArgs;
 
     commentLines:{last[y]+(last[y]_x)?z}[file]\[0;funcSignatures];
     commentLines:commentLines - til each deltas commentLines;
