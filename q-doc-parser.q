@@ -77,6 +77,14 @@
     .qdoc.parser.parse each raze files;
 
     .qdoc.parser.removeFileNameRoots[];
+
+    / Branding
+    brands:.Q.dd\:[folderRoots;`$"q-doc.json"];
+	if[count brands:brands where brands~'key'[brands];
+		.log.info"Found branding information from ",string brand:first brands;
+        @[{.qdoc.branding:.j.k""sv read0 x};brand;
+            {.log.error"Failed to load branding information: ",x}]
+     ];
  };
 
 / Calculates the unique root of all the folders specified and removes it from all the discovered files path for 
@@ -97,14 +105,6 @@
         :hsym `$theRoot[1],ssr[y;theRoot 0;""];
 
     }[paths;] each string .qdoc.parseTree.source;
-
-    / Branding
-    brand:.Q.dd[folderRoot;`$"q-doc.json"];
-    if[brand~key brand;
-        .log.info"Loading branding information from ",string brand;
-        @[{.qdoc.branding:.j.k""sv read0 x};brand;
-            {.log.error"Failed to load branding information: ",x}]
-     ];
  };
 
 / Generates the parse tree for the specified file.
