@@ -57,6 +57,7 @@ QDoc.getHeaderDetails = function() {
     $.getJSON("/jsn?.qdoc.json.getHeaderDetails[]", {}, QDoc.buildHeader);
  }
 
+/*
 // Function executed when the page is loaded to get all the branding information.
 QDoc.getBranding = function() {
     $.getJSON("/jsn?.qdoc.json.getBranding[]", {}, QDoc.showBranding);
@@ -70,6 +71,7 @@ QDoc.showBranding = function(json) {
             $("#brand-" + item).text(data.name).attr("href", !!data.link ? data.link : "#");
     });
  }
+*/
 
 // Function executed when the page is loaded to get all the files in scope for q-doc parsing.
 //  @see QDoc.buildFileTree
