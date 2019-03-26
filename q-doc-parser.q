@@ -1,6 +1,6 @@
 // q-doc Code Documentation Generator
 //   Parser
-// Copyright (C) 2014 Jaskirat M.S. Rajasansir
+// Copyright (C) 2014 - 2018 Jaskirat Rajasansir
 // License BSD, see LICENSE for details
 
 
@@ -63,7 +63,7 @@
 
     folderRoots:distinct folderRoots;
 
-    if[any foldersCheck:not .util.isFolder each folderRoots;
+    if[any foldersCheck:not .type.isFolder each folderRoots;
         .log.error "One or more specified folders does not exist on disk";
         .log.error " Folders: ",.Q.s1 folderRoots where foldersCheck;
         '"FolderDoesNotExistException";
@@ -71,7 +71,7 @@
 
     .qdoc.parseTree.roots:folderRoots;
 
-    files:folderRoots!.util.tree each folderRoots;
+    files:folderRoots!.file.tree each folderRoots;
     files:{ x where any x like/:("*.q";"*.k") } each files;
 
     .qdoc.parser.parse each raze files;
@@ -161,7 +161,9 @@
     keysToRemove:`,.qdoc.parser.postProcess[funcAndArgs;comments;tagComments];
 
     if[not .util.isEmpty keysToRemove;
-        .log.info "Documented objects to be ignored: ",.Q.s1 keysToRemove];
+        .log.info "Documented objects to be ignored: ",.Q.s1 keysToRemove
+    ];
+
     funcAndArgs:keysToRemove _ funcAndArgs;
     comments:keysToRemove _ comments;
     tagComments:keysToRemove _ tagComments;

@@ -1,6 +1,6 @@
 // q-doc Code Documentation Generator
 //  JSON Generator
-// Copyright (C) 2014 Jaskirat M.S. Rajasansir
+// Copyright (C) 2014 - 2018 Jaskirat Rajasansir
 // License BSD, see LICENSE for details
 
 / Gets the branding information that is obtained by parsing 
@@ -62,4 +62,9 @@
     ];
 
     :dict,enlist[`ERROR]!enlist msg;
+ };
+
+/  @returns (Dict) The company and application name for use in the HTML page
+.qdoc.json.getHeaderDetails:{
+    :`company`appName!.qdoc.cfg`companyNameStr`appNameStr;
  };
