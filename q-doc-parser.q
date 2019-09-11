@@ -77,14 +77,6 @@
     .qdoc.parser.parse each raze files;
 
     .qdoc.parser.removeFileNameRoots[];
-
-    / Branding
-    brands:.Q.dd\:[folderRoots;`$"q-doc.json"];
-	if[count brands:brands where brands~'key'[brands];
-		.log.info"Found branding information from ",string brand:first brands;
-        @[{.qdoc.branding:.j.k""sv read0 x};brand;
-            {.log.error"Failed to load branding information: ",x}]
-     ];
  };
 
 / Calculates the unique root of all the folders specified and removes it from all the discovered files path for 
@@ -318,10 +310,10 @@
 .qdoc.parser.inline.code:{[line]
     leads:("{@code";"<code>" ;"{@literal";"<tt>" );
     ends: (1#"}"   ;"</code>";1#"}"      ;"</tt>");
-    tail:-1#slices:0N 4#.qdoc.parser.sliceCode[leads;ends;line];
-    slices:.[-1_slices;(::;1); leads   !L:("<code>" ;"<code>" ;"<tt>" ;"<tt>" )];
-    slices:.[   slices;(::;2);.qdoc.parser.escapeCode trim@];
-    slices:.[         ;(::;3);(ends,'L)!  ("</code>";"</code>";"</tt>";"</tt>")]
-                .[slices;(::;3);:;slices[;3],'slices[;1]];
-    :(,//)slices,tail;
+    slices:.qdoc.parser.sliceCode[leads;ends;line];
+    slices:@[slices;where 1=(til count slices)mod 4;leads!L:("<code>";"<code>";"<tt>";"<tt>")];
+    slices:@[slices;where 2=(til count slices)mod 4;.qdoc.parser.escapeCode trim@];
+    k:where 3=(til count slices)mod 4;
+    slices:@[;k;(ends,'L)!("</code>";"</code>";"</tt>";"</tt>")]@[slices;k;,;slices k-2];
+    raze slices
  };

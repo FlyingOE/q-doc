@@ -3,9 +3,6 @@
 // Copyright (C) 2014 - 2018 Jaskirat Rajasansir
 // License BSD, see LICENSE for details
 
-/ Gets the branding information that is obtained by parsing 
-.qdoc.json.getBranding:{.qdoc.branding};
-
 / Gets all the files that have been parsed by the q-doc system and the number of documented entries per file
 /  @returns (Dict) Single key dictionary 'files' with a table of files and documented entries
 .qdoc.json.getFileList:{

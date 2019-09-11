@@ -57,22 +57,6 @@ QDoc.getHeaderDetails = function() {
     $.getJSON("/jsn?.qdoc.json.getHeaderDetails[]", {}, QDoc.buildHeader);
  }
 
-/*
-// Function executed when the page is loaded to get all the branding information.
-QDoc.getBranding = function() {
-    $.getJSON("/jsn?.qdoc.json.getBranding[]", {}, QDoc.showBranding);
- }
-
-// Shows branding information based on the returned JSON.
-QDoc.showBranding = function(json) {
-    $.each(["company", "application"], function(_, item) {
-        var data = json[item];
-        if (!!data)
-            $("#brand-" + item).text(data.name).attr("href", !!data.link ? data.link : "#");
-    });
- }
-*/
-
 // Function executed when the page is loaded to get all the files in scope for q-doc parsing.
 //  @see QDoc.buildFileTree
 QDoc.getFunctionSources = function() {
