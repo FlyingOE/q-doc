@@ -1,3 +1,4 @@
 [submodule "kdb-common"]
 	path = kdb-common
 	url = https://github.com/BuaBook/kdb-common.git
+	branch = master
